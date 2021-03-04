@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="LeetCode热题100计划-461.汉明距离, Gareth&#39;s Backyard">
+    <meta name="keywords" content="LeetCode热题100-617.合并二叉树, Gareth&#39;s Backyard">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>LeetCode热题100计划-461.汉明距离 | Gareth&#39;s Backyard</title>
+    <title>LeetCode热题100-617.合并二叉树 | Gareth&#39;s Backyard</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">LeetCode热题100计划-461.汉明距离</h1>
+                    <h1 class="description center-align post-title">LeetCode热题100-617.合并二叉树</h1>
                 </div>
             </div>
         </div>
@@ -451,7 +451,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-02-27
+                    2021-03-04
                 </div>
                 
 
@@ -475,70 +475,67 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="第一期的说在前面"><a href="#第一期的说在前面" class="headerlink" title="第一期的说在前面"></a>第一期的说在前面</h1><p>大家好我是Gareth。其实一直想做一个自己的博客，不管是记录学习过程还是生活感悟，想了这么久了终于起笔写下了第一行字，希望这次不止是一个开始，希望自己可以把博客当作一个习惯坚持下去。</p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="题目信息"><a href="#题目信息" class="headerlink" title="题目信息"></a>题目信息</h2><p><img src="/images/461hamming_distance.png"></p>
-<h2 id="思路一：朴素解法"><a href="#思路一：朴素解法" class="headerlink" title="思路一：朴素解法"></a>思路一：朴素解法</h2><p>Hamming Distance，不是应该翻译成海民距离吗，<del>吃我海象神拳！</del><br>看完题之后第一个想到的解法，是把两个数都转成二进制，大数多出来的位数重的1直接计入结果，然后逐位比较，将不同的个数再累加。<br>时间复杂度：O(max(m, n))。m和n分别是两个数的二进制位长度。</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> <span class="token function">HammingDistance</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> x<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">int</span></span> y<span class="token punctuation">)</span>
+                <h1 id="题目信息"><a href="#题目信息" class="headerlink" title="题目信息"></a>题目信息</h1><p><img src="timu.png"><br>这道题从目的上来看，要合并两棵二叉树的所有节点，说明应该是需要对所有节点进行遍历，难点就在于要同时遍历两棵树。根据根节点的访问顺序将遍历二叉树分为三种：前序遍历、中序遍历、后序遍历。<br>三种遍历思路都可以通过递归实现，前序遍历和中序遍历可以借助栈、后序遍历可以借助两个栈非递归实现。</p>
+<h2 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h2><pre class="line-numbers language-csharp" data-language="csharp"><div class="caption"><span>递归</span></div><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">PreOrder</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
-    <span class="token comment">//交换值，把y设成大数</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>x <span class="token operator">></span> y<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token function">doSomething</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">PreOrder</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">PreOrder</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>非递归先序遍历的思路：<br>1.用一个变量node表示当前节点并且入栈，初始值为根节点root<br>2.弹出一个节点赋值给node，打印这个值，先将右儿子（非空）入栈，再将左儿子（非空）入栈，先右再左的原因是栈的操作是先入后出，重复这个步骤<br>4.循环的结束条件为：栈为空</p>
+</blockquote>
+<pre class="line-numbers language-csharp" data-language="csharp"><div class="caption"><span>栈</span></div><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">PreOrderStack</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> q <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Stack<span class="token punctuation">&lt;</span>TreeNode<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">Push</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>q<span class="token punctuation">.</span>Count <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
     <span class="token punctuation">&#123;</span>
-        x <span class="token operator">=</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
-        y <span class="token operator">=</span> x <span class="token operator">-</span> y<span class="token punctuation">;</span>
-        x <span class="token operator">=</span> x <span class="token operator">-</span> y<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token class-name"><span class="token keyword">var</span></span> x_str <span class="token operator">=</span> Convert<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token class-name"><span class="token keyword">var</span></span> y_str <span class="token operator">=</span> Convert<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span>y<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token class-name"><span class="token keyword">int</span></span> start <span class="token operator">=</span> y_str<span class="token punctuation">.</span>Length <span class="token operator">-</span> x_str<span class="token punctuation">.</span>Length<span class="token punctuation">;</span>
-    <span class="token class-name"><span class="token keyword">int</span></span> distance <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token comment">//先统计大数多出来的位数</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> start<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>y_str<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string character">'1'</span><span class="token punctuation">)</span> distance <span class="token operator">++</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token comment">//逐位比较</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> i <span class="token operator">=</span> start<span class="token punctuation">,</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> y_str<span class="token punctuation">.</span>Length<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">,</span> <span class="token operator">++</span>j<span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        System<span class="token punctuation">.</span>Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>y_str<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> x_str<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> node <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">doSomething</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>right <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
         <span class="token punctuation">&#123;</span>
-            distance <span class="token operator">++</span><span class="token punctuation">;</span>
+            q<span class="token punctuation">.</span><span class="token function">Push</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>left <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            q<span class="token punctuation">.</span><span class="token function">Push</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>
-    <span class="token keyword">return</span> distance<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="思路二：异或"><a href="#思路二：异或" class="headerlink" title="思路二：异或"></a>思路二：异或</h2><p>看到题目描述：“二进制位不同”，可以想到使用异或的方法：若对应二进制为两个值不同，则结果为1，否则为0。所以这个题的解法变为：把两个数异或后，统计结果中的1的个数。<br>有三种方式来计算一个二进制数中1的个数：</p>
-<ul>
-<li>利用语言内置函数</li>
-<li>右移一位之后判断最右边是否为1 (通过<code>x&amp;1</code>或<code>x%2</code>)</li>
-<li>克尼根算法<h3 id="右移"><a href="#右移" class="headerlink" title="右移"></a>右移</h3>内置函数就跳过吧，毕竟每种语言都有不同的方式。下面详细说说右移法的思路。<br>每次将数右移一位，高位会补一个0替换丢弃的位，所以循环的终止条件是移位之后的数不等于0。<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> <span class="token function">HammingDistance</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> x<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">int</span></span> y<span class="token punctuation">)</span>
+<h2 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h2><pre class="line-numbers language-csharp" data-language="csharp"><div class="caption"><span>递归</span></div><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">InOrder</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
-    <span class="token class-name"><span class="token keyword">var</span></span> xor <span class="token operator">=</span> x <span class="token operator">^</span> y<span class="token punctuation">;</span>
-    <span class="token class-name"><span class="token keyword">var</span></span> distance <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>xor <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment">//右移直到没有1</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>xor <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> distance <span class="token operator">++</span><span class="token punctuation">;</span>
-        xor <span class="token operator">=</span> xor <span class="token operator">>></span> <span class="token number">1</span><span class="token punctuation">;</span>    
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">return</span> distance<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="哈豆根-Kernighan算法"><a href="#哈豆根-Kernighan算法" class="headerlink" title="哈豆根 Kernighan算法"></a><del>哈豆根</del> Kernighan算法</h3>右移法的缺点在于需要逐位的判断，而不是像人类思维一样跳过中间所有的0，一眼看出来所有1的个数。克尼根算法的基本思想是使用特定运算移除最右侧的1，but how?<blockquote>
-<p>当我们在 number 和 number-1 上做 AND 位运算时，原数字 number 的最右边等于 1 的比特会被移除。<br>所以当number不等于1时，执行一次上述算法，distance+1，并重复上述操作直到number等于0。</p>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token function">InOrder</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">doSomething</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">InOrder</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>非递归中序遍历的思路：<br>1.用一个变量node表示当前节点并且入栈，初始值为根节点root<br>2.不断将node的左子节点入栈，并令node=node.left，重复这个过程直到node.left为null，即叶子节点<br>3.弹出一个节点temp，打印这个值，将temp.right赋值给node，回到步骤2<br>4.循环的结束条件为：栈为空且node为空</p>
 </blockquote>
-<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> <span class="token function">HammingDistance</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> x<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">int</span></span> y<span class="token punctuation">)</span>
+<pre class="line-numbers language-csharp" data-language="csharp"><div class="caption"><span>非递归</span></div><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">InOrderStack</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
-    <span class="token class-name"><span class="token keyword">var</span></span> xor <span class="token operator">=</span> x <span class="token operator">^</span> y<span class="token punctuation">;</span>
-    <span class="token class-name"><span class="token keyword">var</span></span> distance <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span>xor <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> stack <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Stack<span class="token punctuation">&lt;</span>TreeNode<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> node <span class="token operator">=</span> root<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>stack<span class="token punctuation">.</span>Count <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
     <span class="token punctuation">&#123;</span>
-        distance <span class="token operator">++</span><span class="token punctuation">;</span>
-        xor <span class="token operator">=</span> xor <span class="token operator">&amp;</span> <span class="token punctuation">(</span>xor <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//持续将左子节点入栈，直到叶子节点</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>node <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">||</span> stack<span class="token punctuation">.</span>Count <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            stack<span class="token punctuation">.</span><span class="token function">Push</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            node <span class="token operator">=</span> node<span class="token punctuation">.</span>left<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">//弹出一个节点</span>
+        node <span class="token operator">=</span> stack<span class="token punctuation">.</span><span class="token function">Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">doSomething</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//遍历右子树</span>
+        node <span class="token operator">=</span> node<span class="token punctuation">.</span>right<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
-    <span class="token keyword">return</span> distance<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -564,7 +561,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/02/27/LeetCode%E7%83%AD%E9%A2%98100%E8%AE%A1%E5%88%92-461-%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB/">http://example.com/2021/02/27/LeetCode%E7%83%AD%E9%A2%98100%E8%AE%A1%E5%88%92-461-%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB/</a>
+                    <a href="http://example.com/2021/03/04/LeetCode%E7%83%AD%E9%A2%98100-617-%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91/">http://example.com/2021/03/04/LeetCode%E7%83%AD%E9%A2%98100-617-%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -651,9 +648,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/03/04/LeetCode%E7%83%AD%E9%A2%98100-617-%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91/">
                     <div class="card-image">
@@ -671,9 +669,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -682,6 +680,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -704,13 +703,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/02/27/hello-world/">
+                <a href="/2021/02/27/LeetCode%E7%83%AD%E9%A2%98100%E8%AE%A1%E5%88%92-461-%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="LeetCode热题100计划-461.汉明距离">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">LeetCode热题100计划-461.汉明距离</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -730,6 +729,18 @@
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/LeetCode/">
+                        <span class="chip bg-color">LeetCode</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">算法</span>
+                    </a>
+                    
                 </div>
                 
             </div>
