@@ -439,6 +439,10 @@
                                 <span class="chip bg-color">算法</span>
                             </a>
                         
+                            <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                                <span class="chip bg-color">二叉树</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -475,8 +479,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="题目信息"><a href="#题目信息" class="headerlink" title="题目信息"></a>题目信息</h1><p><img src="timu.png"><br>这道题从目的上来看，要合并两棵二叉树的所有节点，说明应该是需要对所有节点进行遍历，难点就在于要同时遍历两棵树。根据根节点的访问顺序将遍历二叉树分为三种：前序遍历、中序遍历、后序遍历。<br>三种遍历思路都可以通过递归实现，前序遍历和中序遍历可以借助栈、后序遍历可以借助两个栈非递归实现。</p>
-<h2 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h2><pre class="line-numbers language-csharp" data-language="csharp"><div class="caption"><span>递归</span></div><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">PreOrder</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
+                <h1 id="题目信息"><a href="#题目信息" class="headerlink" title="题目信息"></a>题目信息</h1><p><img src="timu.png"><br>这道题从目的上来看，要合并两棵二叉树的所有节点，说明应该是需要对所有节点进行遍历，这有何难！区别就在于这里要同时遍历两棵树。</p>
+<h1 id="回顾：二叉树的四种遍历方式"><a href="#回顾：二叉树的四种遍历方式" class="headerlink" title="回顾：二叉树的四种遍历方式"></a>回顾：二叉树的四种遍历方式</h1><p>根据根节点的访问顺序将遍历二叉树分为三种：前序遍历、中序遍历、后序遍历。<br>三种遍历思路都可以通过递归实现，前序遍历和中序遍历可以借助栈、后序遍历可以借助两个栈非递归实现。</p>
+<h2 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h2><blockquote>
+<p>递归</p>
+</blockquote>
+<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">PreOrder</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
     <span class="token function">doSomething</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -486,7 +494,7 @@
 <blockquote>
 <p>非递归先序遍历的思路：<br>1.用一个变量node表示当前节点并且入栈，初始值为根节点root<br>2.弹出一个节点赋值给node，打印这个值，先将右儿子（非空）入栈，再将左儿子（非空）入栈，先右再左的原因是栈的操作是先入后出，重复这个步骤<br>4.循环的结束条件为：栈为空</p>
 </blockquote>
-<pre class="line-numbers language-csharp" data-language="csharp"><div class="caption"><span>栈</span></div><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">PreOrderStack</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
+<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">PreOrderStack</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
     <span class="token class-name"><span class="token keyword">var</span></span> q <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Stack<span class="token punctuation">&lt;</span>TreeNode<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -506,7 +514,10 @@
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h2><pre class="line-numbers language-csharp" data-language="csharp"><div class="caption"><span>递归</span></div><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">InOrder</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
+<h2 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h2><blockquote>
+<p>递归</p>
+</blockquote>
+<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">InOrder</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
     <span class="token function">InOrder</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -516,7 +527,7 @@
 <blockquote>
 <p>非递归中序遍历的思路：<br>1.用一个变量node表示当前节点并且入栈，初始值为根节点root<br>2.不断将node的左子节点入栈，并令node=node.left，重复这个过程直到node.left为null，即叶子节点<br>3.弹出一个节点temp，打印这个值，将temp.right赋值给node，回到步骤2<br>4.循环的结束条件为：栈为空且node为空</p>
 </blockquote>
-<pre class="line-numbers language-csharp" data-language="csharp"><div class="caption"><span>非递归</span></div><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">InOrderStack</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
+<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">InOrderStack</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
     <span class="token class-name"><span class="token keyword">var</span></span> stack <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Stack<span class="token punctuation">&lt;</span>TreeNode<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -536,6 +547,164 @@
         node <span class="token operator">=</span> node<span class="token punctuation">.</span>right<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h2><blockquote>
+<p>递归</p>
+</blockquote>
+<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">PostOrder</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token function">PostOrder</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">PostOrder</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">doSomething</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>后序遍历的非递归实现思路-1：<br>1.申请两个栈st1和st2，将跟节点入st1<br>2.从st1弹出一个节点，赋值给node，将node的左右子节点压入st1，弹出的node压入st2<br>3.重复步骤2，直到st1为空<br>4.将st2按顺序弹出，弹出的顺序就是后序遍历的顺序  </p>
+</blockquote>
+<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">PostOrderStacks</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> st1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Stack<span class="token punctuation">&lt;</span>TreeNode<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> st2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Stack<span class="token punctuation">&lt;</span>TreeNode<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    st1<span class="token punctuation">.</span><span class="token function">Push</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>st1<span class="token punctuation">.</span>Count <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> node <span class="token operator">=</span> st1<span class="token punctuation">.</span><span class="token function">Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>left <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            st1<span class="token punctuation">.</span><span class="token function">Push</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>right <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            st1<span class="token punctuation">.</span><span class="token function">Push</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        st2<span class="token punctuation">.</span><span class="token function">Push</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>st2<span class="token punctuation">.</span>Count <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">doSomething</span><span class="token punctuation">(</span>st2<span class="token punctuation">.</span><span class="token function">Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>后序遍历的非递归实现思路-2：<br>1.申请一个栈<code>st</code>，一个变量<code>node</code>用作标记，将根节点<code>root</code>入栈，<code>node</code>的初始值设为root<br>2.设<code>peak</code>为<code>st</code>的栈顶节点：每次循环考虑以下三种情况：<br>(1)<code>peak.left != null &amp;&amp; peak.left != node &amp;&amp; peak.right != node</code>, 把<code>peak</code>的左儿子压入<code>st</code><br>(2)<code>peak.right != null &amp;&amp; peak.right != node</code>，把<code>peak</code>的右儿子压入<code>st</code><br>(3)如果(1)和(2)不成立，弹出<code>peak</code>并打印，然后将<code>node</code>的值设为<code>peak</code><br>3.重复步骤2，直到<code>st</code>为空</p>
+</blockquote>
+<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">PostOrderStack</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> st <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Stack<span class="token punctuation">&lt;</span>TreeNode<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    st<span class="token punctuation">.</span><span class="token function">Push</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> node <span class="token operator">=</span> root<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>st<span class="token punctuation">.</span>Count <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> head <span class="token operator">=</span> st<span class="token punctuation">.</span><span class="token function">Peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>head<span class="token punctuation">.</span>left <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> head<span class="token punctuation">.</span>left <span class="token operator">!=</span> node <span class="token operator">&amp;&amp;</span> head<span class="token punctuation">.</span>right <span class="token operator">!=</span> node<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            st<span class="token punctuation">.</span><span class="token function">Push</span><span class="token punctuation">(</span>head<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>head<span class="token punctuation">.</span>right <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> head<span class="token punctuation">.</span>right <span class="token operator">!=</span> node<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            st<span class="token punctuation">.</span><span class="token function">Push</span><span class="token punctuation">(</span>head<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">else</span> 
+        <span class="token punctuation">&#123;</span>
+            head <span class="token operator">=</span> st<span class="token punctuation">.</span><span class="token function">Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">doSomething</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            node <span class="token operator">=</span> head<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="层序遍历"><a href="#层序遍历" class="headerlink" title="层序遍历"></a>层序遍历</h2><p>层序遍历是一种广度优先的遍历方式，遍历顺序是从根节点逐层遍历，在同一层从左往右遍历。<br>层序遍历通常借助队列来实现，比较好理解，直接贴代码吧。</p>
+<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">LevelOrder</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> q <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Queue<span class="token punctuation">&lt;</span>TreeNode<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>q<span class="token punctuation">.</span>Count <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> node <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">Dequeue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">doSomething</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>left <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>right <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="递归方式"><a href="#递归方式" class="headerlink" title="递归方式"></a>递归方式</h2><p>题目没有明确说明合并后的树是新树还是在旧的树上叠加，姑且认为是把t2合并到t1上。递归的方式实现起来很简单也比较容易理解，唯一的缺点就是执行效率比较低。  </p>
+<blockquote>
+<p>时间复杂度： <code>O(min(m,n))</code>，其中<code>m</code>和<code>n</code>分别是两个二叉树的节点个数。对两个二叉树同时进行深度优先搜索，只有当两个二叉树中的对应节点都不为空时才会对该节点进行显性合并操作，因此被访问到的节点数不会超过较小的二叉树的节点数。<br>空间复杂度：<code>O(min(m,n))</code>，其中<code>m</code>和<code>n</code>分别是两个二叉树的节点个数。空间复杂度取决于递归调用的层数，递归调用的层数不会超过较小的二叉树的最大高度，最坏情况下，二叉树的高度等于节点数。</p>
+</blockquote>
+<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name">TreeNode</span> <span class="token function">MergeTrees</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root1<span class="token punctuation">,</span> <span class="token class-name">TreeNode</span> root2<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token comment">//如果有一棵子树为空，则将另一棵子树整个赋值过来</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root1 <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> root2 <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 这里是c#的语法糖，意思是如果root1为null则返回root2，否则返回root1</span>
+        <span class="token keyword">return</span> root1 <span class="token operator">??</span> root2<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">// 两者都不为null的情况，叠加</span>
+    root1<span class="token punctuation">.</span>val <span class="token operator">+=</span> root2<span class="token punctuation">.</span>val<span class="token punctuation">;</span>
+    <span class="token comment">// 递归左右子树</span>
+    root1<span class="token punctuation">.</span>left <span class="token operator">=</span> <span class="token function">MergeTrees</span><span class="token punctuation">(</span>root1<span class="token punctuation">.</span>left<span class="token punctuation">,</span> root2<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    root1<span class="token punctuation">.</span>right <span class="token operator">=</span> <span class="token function">MergeTrees</span><span class="token punctuation">(</span>root1<span class="token punctuation">.</span>right<span class="token punctuation">,</span> root2<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> root1<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="广度优先遍历"><a href="#广度优先遍历" class="headerlink" title="广度优先遍历"></a>广度优先遍历</h2><pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name">TreeNode</span> <span class="token function">MergeTrees</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root1<span class="token punctuation">,</span> <span class="token class-name">TreeNode</span> root2<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> q1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Queue<span class="token punctuation">&lt;</span>TreeNode<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> q2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Queue<span class="token punctuation">&lt;</span>TreeNode<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> q <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Queue<span class="token punctuation">&lt;</span>TreeNode<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root1 <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> root2 <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> root1 <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token punctuation">?</span> root2 <span class="token punctuation">:</span> root1<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> node <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">TreeNode</span><span class="token punctuation">(</span>root1<span class="token punctuation">.</span>val <span class="token operator">+</span> root2<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    q<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    q1<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>root1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    q2<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>root2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>q1<span class="token punctuation">.</span>Count <span class="token operator">!=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> q2<span class="token punctuation">.</span>Count <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment">//用遍历一棵树的思路遍历两棵树</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> node1 <span class="token operator">=</span> q1<span class="token punctuation">.</span><span class="token function">Dequeue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> node2 <span class="token operator">=</span> q2<span class="token punctuation">.</span><span class="token function">Dequeue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> node3 <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">Dequeue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node1<span class="token punctuation">.</span>left <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">||</span> node2<span class="token punctuation">.</span>left <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token comment">//先左子树</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>node1<span class="token punctuation">.</span>left <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> node2<span class="token punctuation">.</span>left <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token comment">//左子树都不为空，组合</span>
+            <span class="token punctuation">&#123;</span>
+                <span class="token class-name"><span class="token keyword">var</span></span> newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">TreeNode</span><span class="token punctuation">(</span>node1<span class="token punctuation">.</span>left<span class="token punctuation">.</span>val <span class="token operator">+</span> node2<span class="token punctuation">.</span>left<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                node3<span class="token punctuation">.</span>left <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+                q<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>newNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                q1<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>node1<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                q2<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>node2<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>node1<span class="token punctuation">.</span>left <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token comment">// 有一个为空，直接取另一个</span>
+            <span class="token punctuation">&#123;</span>
+                node3<span class="token punctuation">.</span>left <span class="token operator">=</span> node2<span class="token punctuation">.</span>left<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>node2<span class="token punctuation">.</span>left <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                node3<span class="token punctuation">.</span>left <span class="token operator">=</span> node1<span class="token punctuation">.</span>left<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">//右子树和左子树一样</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node1<span class="token punctuation">.</span>right <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">||</span> node2<span class="token punctuation">.</span>right <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>node1<span class="token punctuation">.</span>right <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> node2<span class="token punctuation">.</span>right <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                <span class="token class-name"><span class="token keyword">var</span></span> newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">TreeNode</span><span class="token punctuation">(</span>node1<span class="token punctuation">.</span>right<span class="token punctuation">.</span>val <span class="token operator">+</span> node2<span class="token punctuation">.</span>right<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                node3<span class="token punctuation">.</span>right <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+                q<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>newNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                q1<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>node1<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                q2<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>node2<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>node1<span class="token punctuation">.</span>right <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                node3<span class="token punctuation">.</span>right <span class="token operator">=</span> node2<span class="token punctuation">.</span>right<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>node2<span class="token punctuation">.</span>right <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                node3<span class="token punctuation">.</span>right <span class="token operator">=</span> node1<span class="token punctuation">.</span>right<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> node<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -605,6 +774,10 @@
                             
                                 <a href="/tags/%E7%AE%97%E6%B3%95/">
                                     <span class="chip bg-color">算法</span>
+                                </a>
+                            
+                                <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                                    <span class="chip bg-color">二叉树</span>
                                 </a>
                             
                         </div>
@@ -692,6 +865,10 @@
                         <span class="chip bg-color">算法</span>
                     </a>
                     
+                    <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                        <span class="chip bg-color">二叉树</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -707,9 +884,9 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="LeetCode热题100计划-461.汉明距离">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="LeetCode热题100-461.汉明距离">
                         
-                        <span class="card-title">LeetCode热题100计划-461.汉明距离</span>
+                        <span class="card-title">LeetCode热题100-461.汉明距离</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
