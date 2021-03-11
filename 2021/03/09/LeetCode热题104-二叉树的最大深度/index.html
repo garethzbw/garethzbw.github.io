@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="LeetCode热题100-226.翻转二叉树, Gareth&#39;s Backyard">
+    <meta name="keywords" content="LeetCode热题104.二叉树的最大深度, Gareth&#39;s Backyard">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>LeetCode热题100-226.翻转二叉树 | Gareth&#39;s Backyard</title>
+    <title>LeetCode热题104.二叉树的最大深度 | Gareth&#39;s Backyard</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">LeetCode热题100-226.翻转二叉树</h1>
+                    <h1 class="description center-align post-title">LeetCode热题104.二叉树的最大深度</h1>
                 </div>
             </div>
         </div>
@@ -479,57 +479,33 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="题目信息"><a href="#题目信息" class="headerlink" title="题目信息"></a>题目信息</h1><p><img src="timu.png"><br>从题目上看，要从根节点开始，把每个节点的左子树和右子树进行翻转。那么首先想到的就是递归的方式，可以在递的过程中翻转，也可以在归的过程中翻转，属于深度优先的方式。也可以通过广度优先的层序遍历方式，借助队列来实现按层翻转。</p>
-<h1 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h1><h2 id="递归-其一"><a href="#递归-其一" class="headerlink" title="递归-其一"></a>递归-其一</h2><p>在递的过程中交换两子树位置，除调用栈之外需要使用一个额外空间temp用来交换左右子树。</p>
-<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name">TreeNode</span> <span class="token function">InvertTree</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
+                <h1 id="题目信息"><a href="#题目信息" class="headerlink" title="题目信息"></a>题目信息</h1><p><img src="timu.png"><br>一棵二叉树的深度，指从根节点到最远叶子节点的最长路径，简单难度的二叉树题前面已经做了好几道了，基本离不开深度优先（递归）、广度优先（迭代）两种解法。</p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><h2 id="深度优先"><a href="#深度优先" class="headerlink" title="深度优先"></a>深度优先</h2><p>用递归的思想思考这个问题，就可以转化为：假设我们已经知道左子树和右子树的最大深度，那么这一层的最大深度就是左右当中更大的深度再加1。<br>可以看出递归法计算最大深度是自底向上计算的。</p>
+<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> <span class="token function">MaxDepth</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token comment">//在递的过程中交换两子树位置</span>
-    <span class="token class-name"><span class="token keyword">var</span></span> temp <span class="token operator">=</span> root<span class="token punctuation">.</span>left<span class="token punctuation">;</span>
-    root<span class="token punctuation">.</span>left <span class="token operator">=</span> root<span class="token punctuation">.</span>right<span class="token punctuation">;</span>
-    root<span class="token punctuation">.</span>right <span class="token operator">=</span> temp<span class="token punctuation">;</span>
-    <span class="token function">InvertTree</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">InvertTree</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> root<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="递归-其二"><a href="#递归-其二" class="headerlink" title="递归-其二"></a>递归-其二</h2><p>leetcode的官方题解，相比于上一种更难理解一些，在从叶子节点向根节点归的过程中假定前面所有节点的左右子树已经翻转。</p>
-<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name">TreeNode</span> <span class="token function">InvertTree</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">1</span> <span class="token operator">+</span> Math<span class="token punctuation">.</span><span class="token function">Max</span><span class="token punctuation">(</span><span class="token function">MaxDepth</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">MaxDepth</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="广度优先"><a href="#广度优先" class="headerlink" title="广度优先"></a>广度优先</h2><p>广度优先，也就是层序遍历的思想，用distance表示最大层数，那么每遍历完一层的时候distance加1就好了。<br>按照通常层序遍历的思路，我们是不知道什么时候遍历完了一层的，所以我们在每次遍历的时候需要把当前层的所有节点出队，并将所有子节点入队，并将distance加1。</p>
+<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> <span class="token function">MaxDepth</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token class-name"><span class="token keyword">var</span></span> left <span class="token operator">=</span> <span class="token function">InvertTree</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token class-name"><span class="token keyword">var</span></span> right <span class="token operator">=</span> <span class="token function">InvertTree</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    root<span class="token punctuation">.</span>right <span class="token operator">=</span> left<span class="token punctuation">;</span>
-    root<span class="token punctuation">.</span>left <span class="token operator">=</span> right<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> root<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="层序遍历-迭代"><a href="#层序遍历-迭代" class="headerlink" title="层序遍历-迭代"></a>层序遍历-迭代</h1><pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token return-type class-name">TreeNode</span> <span class="token function">InvertTree</span><span class="token punctuation">(</span><span class="token class-name">TreeNode</span> root<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span> root<span class="token punctuation">;</span>
     <span class="token class-name"><span class="token keyword">var</span></span> q <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Queue<span class="token punctuation">&lt;</span>TreeNode<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> distance <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     q<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">while</span> <span class="token punctuation">(</span>q<span class="token punctuation">.</span>Count <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
     <span class="token punctuation">&#123;</span>
-        <span class="token class-name"><span class="token keyword">var</span></span> node <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">Dequeue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name"><span class="token keyword">var</span></span> temp <span class="token operator">=</span> node<span class="token punctuation">.</span>left<span class="token punctuation">;</span>
-        node<span class="token punctuation">.</span>left <span class="token operator">=</span> node<span class="token punctuation">.</span>right<span class="token punctuation">;</span>
-        node<span class="token punctuation">.</span>right <span class="token operator">=</span> temp<span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>left <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+        distance <span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> size <span class="token operator">=</span> q<span class="token punctuation">.</span>Count<span class="token punctuation">;</span> <span class="token comment">//当前层节点数</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>size <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment">//把当前层清空，并把子节点入队</span>
         <span class="token punctuation">&#123;</span>
-            q<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>    
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>right <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            q<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name"><span class="token keyword">var</span></span> node <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">Dequeue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            size <span class="token operator">--</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>left <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>right <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">Enqueue</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>
-    <span class="token keyword">return</span> root<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">return</span> distance<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -555,7 +531,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/03/09/LeetCode%E7%83%AD%E9%A2%98100-226-%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91/">http://example.com/2021/03/09/LeetCode%E7%83%AD%E9%A2%98100-226-%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91/</a>
+                    <a href="http://example.com/2021/03/09/LeetCode%E7%83%AD%E9%A2%98104-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/">http://example.com/2021/03/09/LeetCode%E7%83%AD%E9%A2%98104-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -646,9 +622,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/03/09/LeetCode%E7%83%AD%E9%A2%98104-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/">
                     <div class="card-image">
@@ -666,9 +643,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-09
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-09
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -677,6 +654,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -703,13 +681,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/04/LeetCode%E7%83%AD%E9%A2%98100-617-%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                <a href="/2021/03/09/LeetCode%E7%83%AD%E9%A2%98100-226-%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="LeetCode热题100-617.合并二叉树">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="LeetCode热题100-226.翻转二叉树">
                         
-                        <span class="card-title">LeetCode热题100-617.合并二叉树</span>
+                        <span class="card-title">LeetCode热题100-226.翻转二叉树</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -720,7 +698,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-04
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-09
                             </span>
                         <span class="publish-author">
                             
